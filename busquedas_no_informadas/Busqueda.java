@@ -35,7 +35,7 @@ public class Busqueda {
             long fin = 0;
 
             if (costoUniforme) {
-                System.out.println("☆☆☆☆☆☆ Ejecutando Búsqueda por Prioridad ☆☆☆☆☆☆");
+                System.out.println("☆☆☆☆☆☆ Ejecutando Búsqueda por Costo Uniforme ☆☆☆☆☆☆");
                 inicio = System.currentTimeMillis();
                 busquedaPorCostoUniforme();
                 fin = System.currentTimeMillis();

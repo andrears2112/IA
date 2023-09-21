@@ -11,7 +11,7 @@ class Main {
         System.out.println("\n☆☆☆☆☆☆ Menú ☆☆☆☆☆☆");
         System.out.println("1.- Búsqueda por anchura");
         System.out.println("2.- Búsqueda por profundidad");
-        System.out.println("3.- Búsqueda por cola de prioridad");
+        System.out.println("3.- Búsqueda por costo uniforme");
         System.out.println("4.- Salir");
         
         int n = scan.nextInt();
