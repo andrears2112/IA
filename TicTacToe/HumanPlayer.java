@@ -12,7 +12,7 @@ class HumanPlayer {
 
     public int humanMove(char[] state) {
         while (true) {
-            System.out.print("Enter the square to fix spot(1-9): ");
+            System.out.print("Ingresa el número de casilla (1-25): ");
             //int square = Integer.parseInt(System.console().readLine());
             int square = Leer.nextInt();
             System.out.println();

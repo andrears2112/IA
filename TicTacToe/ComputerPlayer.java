@@ -12,7 +12,7 @@ class ComputerPlayer {
     public char players(char[] state) {
         int x = 0;
         int o = 0;
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 25; i++) {
             if (state[i] == 'X') {
                 x++;
             }
@@ -38,7 +38,7 @@ class ComputerPlayer {
         }
         int[] actions = new int[count];
         int index = 0;
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 25; i++) {
             if (state[i] == '-') {
                 actions[index] = i;
                 index++;
@@ -65,28 +65,40 @@ class ComputerPlayer {
     }
 
     public boolean isPlayerWin(char[] state, char player) {
-        if (state[0] == player && state[1] == player && state[2] == player) {
+        if (state[0] == player && state[1] == player && state[2] == player && state[3] == player && state[4] == player) {
             return true;
         }
-        if (state[3] == player && state[4] == player && state[5] == player) {
+        if (state[5] == player && state[6] == player && state[7] == player && state[8] == player && state[9] == player) {
             return true;
         }
-        if (state[6] == player && state[7] == player && state[8] == player) {
+        if (state[10] == player && state[11] == player && state[12] == player && state[13] == player && state[14] == player) {
             return true;
         }
-        if (state[0] == player && state[3] == player && state[6] == player) {
+        if (state[15] == player && state[16] == player && state[17] == player && state[18] == player && state[19] == player) {
             return true;
         }
-        if (state[1] == player && state[4] == player && state[7] == player) {
+        if (state[20] == player && state[21] == player && state[22] == player && state[23] == player && state[24] == player) {
             return true;
         }
-        if (state[2] == player && state[5] == player && state[8] == player) {
+        if (state[0] == player && state[5] == player && state[10] == player && state[15] == player && state[20] == player) {
             return true;
         }
-        if (state[0] == player && state[4] == player && state[8] == player) {
+        if (state[1] == player && state[6] == player && state[11] == player && state[16] == player && state[21] == player) {
             return true;
         }
-        if (state[2] == player && state[4] == player && state[6] == player) {
+        if (state[2] == player && state[7] == player && state[12] == player && state[17] == player && state[22] == player) {
+            return true;
+        }
+        if (state[3] == player && state[8] == player && state[13] == player && state[18] == player && state[23] == player) {
+            return true;
+        }
+        if (state[4] == player && state[9] == player && state[14] == player && state[19] == player && state[24] == player) {
+            return true;
+        }
+        if (state[0] == player && state[6] == player && state[12] == player && state[18] == player && state[24] == player) {
+            return true;
+        }
+        if (state[4] == player && state[8] == player && state[12] == player && state[16] == player && state[20] == player) {
             return true;
         }
         return false;
