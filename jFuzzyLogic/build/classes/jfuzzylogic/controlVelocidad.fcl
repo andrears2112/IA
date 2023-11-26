@@ -1,0 +1,47 @@
+//Ejemplo sobre el control de velocidad de un motor de corriente alterna
+FUNCTION_BLOCK ControlVelocidad
+
+VAR_INPUT
+	Error : REAL;
+	Cambio_Error : REAL;
+END_VAR
+
+VAR_OUTPUT 
+	Control : REAL;
+END_VAR
+
+FUZZIFY Error
+	TERM eb := (0,0) (0.04,1) (0.08,0); 	// eb = Error bajo
+	TERM em := (0.06,0) (0.1,1) (0.14,0);	// em = Error medio
+	TERM ea := (0.12,0) (0.16,1) (0.2,0);	// ea = Error alto
+END_FUZZIFY
+
+FUZZIFY Cambio_Error
+	TERM ceb := (0,0) (0.15,1) (0.3,0);	// ceb = Cambio error bajo
+	TERM cem := (0.25,0) (0.4,1) (0.55,0);	// ceb = Cambio error medio
+	TERM cea := (0.48,0) (0.65,1) (0.8,0);	// ceb = Cambio error alto
+END_FUZZIFY
+
+DEFUZZIFY Control
+	TERM cb := (0,0) (0.15,1) (0.3,0);	// cb = Control bajo
+	TERM cm := (0.25,0) (0.4,1) (0.55,0);	// cm = Control medio
+	TERM ca := (0.5,0) (0.65,1) (0.8,0);	// ca = Control alto
+END_DEFUZZIFY
+
+RULEBLOCK No1
+	AND : MIN;	// Use 'min' for 'and'
+	ACT : MIN;	// Use 'min' activation method
+	ACCU : MAX;	// Use 'max' accumulation method
+
+	RULE 1 : IF Error IS eb AND Cambio_Error IS ceb THEN Control IS cb;
+	RULE 2 : IF Error IS eb AND Cambio_Error IS ceb THEN Control IS cm;
+	RULE 3 : IF Error IS eb AND Cambio_Error IS cea THEN Control IS ca;
+	RULE 4 : IF Error IS em AND Cambio_Error IS ceb THEN Control IS cb;
+	RULE 5 : IF Error IS em AND Cambio_Error IS cem THEN Control IS cm; 
+	RULE 6 : IF Error IS em AND Cambio_Error IS cea THEN Control IS ca;
+	RULE 7 : IF Error IS ea AND Cambio_Error IS ceb THEN Control IS cb;
+	RULE 8 : IF Error IS ea AND Cambio_Error IS cem THEN Control IS cm; 
+	RULE 9 : IF Error IS ea AND Cambio_Error IS cea THEN Control IS ca;
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
