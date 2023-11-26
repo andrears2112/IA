@@ -8,8 +8,8 @@ class TicTacToe {
     private char botPlayer;
 
     public TicTacToe() {
-        board = new char[25];
-        for (int i = 0; i < 25; i++) {
+        board = new char[9];
+        for (int i = 0; i < 9; i++) {
             board[i] = '-';
         }
         Random random = new Random();
@@ -24,8 +24,8 @@ class TicTacToe {
 
     public void showBoard() {
         System.out.println();
-        for (int i = 0; i < 5; i++) {
-            System.out.println("  " + board[0 + (i * 5)] + " | " + board[1 + (i * 5)] + " | " + board[2 + (i * 5)]+ " | " + board[3 + (i * 5)]+ " | " + board[4 + (i * 5)]);
+        for (int i = 0; i < 3; i++) {
+            System.out.println("  " + board[0 + (i * 3)] + " | " + board[1 + (i * 3)] + " | " + board[2 + (i * 3)]);
             System.out.println();
         }
     }
@@ -40,40 +40,28 @@ class TicTacToe {
     }
 
     public boolean isPlayerWin(char player) {
-        if (board[0] == player && board[1] == player && board[2] == player && board[3] == player && board[4] == player) {
+        if (board[0] == player && board[1] == player && board[2] == player) {
             return true;
         }
-        if (board[5] == player && board[6] == player && board[7] == player && board[8] == player && board[9] == player) {
+        if (board[3] == player && board[4] == player && board[5] == player) {
             return true;
         }
-        if (board[10] == player && board[11] == player && board[12] == player && board[13] == player && board[14] == player) {
+        if (board[6] == player && board[7] == player && board[8] == player) {
             return true;
         }
-        if (board[15] == player && board[16] == player && board[17] == player && board[18] == player && board[19] == player) {
+        if (board[0] == player && board[3] == player && board[6] == player) {
             return true;
         }
-        if (board[20] == player && board[21] == player && board[22] == player && board[23] == player && board[24] == player) {
+        if (board[1] == player && board[4] == player && board[7] == player) {
             return true;
         }
-        if (board[0] == player && board[5] == player && board[10] == player && board[15] == player && board[20] == player) {
+        if (board[2] == player && board[5] == player && board[8] == player) {
             return true;
         }
-        if (board[1] == player && board[6] == player && board[11] == player && board[16] == player && board[21] == player) {
+        if (board[0] == player && board[4] == player && board[8] == player) {
             return true;
         }
-        if (board[2] == player && board[7] == player && board[12] == player && board[17] == player && board[22] == player) {
-            return true;
-        }
-        if (board[3] == player && board[8] == player && board[13] == player && board[18] == player && board[23] == player) {
-            return true;
-        }
-        if (board[4] == player && board[9] == player && board[14] == player && board[19] == player && board[24] == player) {
-            return true;
-        }
-        if (board[0] == player && board[6] == player && board[12] == player && board[18] == player && board[24] == player) {
-            return true;
-        }
-        if (board[4] == player && board[8] == player && board[12] == player && board[16] == player && board[20] == player) {
+        if (board[2] == player && board[4] == player && board[6] == player) {
             return true;
         }
         return false;
@@ -81,37 +69,56 @@ class TicTacToe {
 
     public boolean checkWinner() {
         if (isPlayerWin(humanPlayer)) {
-            System.out.println("   ¡El jugador " + humanPlayer + " ganó!");
+        	System.out.println("   �El jugador " + humanPlayer + " gan�!");
             return true;
         }
         if (isPlayerWin(botPlayer)) {
-            System.out.println("   ¡El jugador " + botPlayer + " ganó!");
+        	System.out.println("   �El jugador " + botPlayer + " gan�!");
             return true;
         }
         if (isBoardFilled()) {
-            System.out.println("   ¡Empate!");
+        	System.out.println("   �Empate!");
             return true;
         }
         return false;
     }
 
-    public void start() {
+    public void start(int Inicia) {
         ComputerPlayer bot = new ComputerPlayer(botPlayer);
         HumanPlayer human = new HumanPlayer(humanPlayer);
-        while (true) {
-            System.out.println("   Turno del jugador: " + humanPlayer);
+        if(Inicia==2) {
+        	while (true) {
+        		System.out.println("   Turno del jugador: " + humanPlayer);
+                showBoard();
+                int square = human.humanMove(board);
+                board[square] = humanPlayer;
+                if (checkWinner()) {
+                    break;
+                }
+                square = bot.machineMove(board);
+                board[square] = botPlayer;
+                if (checkWinner()) {
+                    break;
+                }
+            }
             showBoard();
-            int square = human.humanMove(board);
-            board[square] = humanPlayer;
-            if (checkWinner()) {
-                break;
-            }
-            square = bot.machineMove(board);
-            board[square] = botPlayer;
-            if (checkWinner()) {
-                break;
-            }
         }
-        showBoard();
+        else {
+        	while (true) {
+                int square = bot.machineMove(board);
+                board[square] = botPlayer;
+                if (checkWinner()) {
+                    break;
+                }
+                System.out.println("   Turno del jugador: " + humanPlayer);
+                showBoard();
+                square = human.humanMove(board);
+                board[square] = humanPlayer;
+                if (checkWinner()) {
+                    break;
+                }
+            }
+            showBoard();
+        }
     }
 }
