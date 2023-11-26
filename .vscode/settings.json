@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "jFuzzyLogic/src/jfuzzylogic/jFuzzyLogic.jar"
+    ]
+}
