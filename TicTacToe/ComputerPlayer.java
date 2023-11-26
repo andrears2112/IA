@@ -1,6 +1,6 @@
 package TicTacToe;
 
-class ComputerPlayer {
+class ComputerPlayer extends TicTacToe {
     private char botPlayer;
     private char humanPlayer;
 
@@ -12,7 +12,7 @@ class ComputerPlayer {
     public char players(char[] state) {
         int x = 0;
         int o = 0;
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < 9; i++) {
             if (state[i] == 'X') {
                 x++;
             }
@@ -38,7 +38,7 @@ class ComputerPlayer {
         }
         int[] actions = new int[count];
         int index = 0;
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < 9; i++) {
             if (state[i] == '-') {
                 actions[index] = i;
                 index++;
@@ -65,40 +65,28 @@ class ComputerPlayer {
     }
 
     public boolean isPlayerWin(char[] state, char player) {
-        if (state[0] == player && state[1] == player && state[2] == player && state[3] == player && state[4] == player) {
+        if (state[0] == player && state[1] == player && state[2] == player) {
             return true;
         }
-        if (state[5] == player && state[6] == player && state[7] == player && state[8] == player && state[9] == player) {
+        if (state[3] == player && state[4] == player && state[5] == player) {
             return true;
         }
-        if (state[10] == player && state[11] == player && state[12] == player && state[13] == player && state[14] == player) {
+        if (state[6] == player && state[7] == player && state[8] == player) {
             return true;
         }
-        if (state[15] == player && state[16] == player && state[17] == player && state[18] == player && state[19] == player) {
+        if (state[0] == player && state[3] == player && state[6] == player) {
             return true;
         }
-        if (state[20] == player && state[21] == player && state[22] == player && state[23] == player && state[24] == player) {
+        if (state[1] == player && state[4] == player && state[7] == player) {
             return true;
         }
-        if (state[0] == player && state[5] == player && state[10] == player && state[15] == player && state[20] == player) {
+        if (state[2] == player && state[5] == player && state[8] == player) {
             return true;
         }
-        if (state[1] == player && state[6] == player && state[11] == player && state[16] == player && state[21] == player) {
+        if (state[0] == player && state[4] == player && state[8] == player) {
             return true;
         }
-        if (state[2] == player && state[7] == player && state[12] == player && state[17] == player && state[22] == player) {
-            return true;
-        }
-        if (state[3] == player && state[8] == player && state[13] == player && state[18] == player && state[23] == player) {
-            return true;
-        }
-        if (state[4] == player && state[9] == player && state[14] == player && state[19] == player && state[24] == player) {
-            return true;
-        }
-        if (state[0] == player && state[6] == player && state[12] == player && state[18] == player && state[24] == player) {
-            return true;
-        }
-        if (state[4] == player && state[8] == player && state[12] == player && state[16] == player && state[20] == player) {
+        if (state[2] == player && state[4] == player && state[6] == player) {
             return true;
         }
         return false;
@@ -131,6 +119,13 @@ class ComputerPlayer {
                     bestScore = simScore;
                 }
             }
+            /*for(int i=0; i < actions(state).length; i++) {
+            	char[] newState = result(state, (i+1));
+                int simScore = minimax(newState, otherPlayer);
+                if (simScore < bestScore) {
+                    bestScore = simScore;
+                }
+            }*/
             return bestScore;
         }
     }
