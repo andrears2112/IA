@@ -12,7 +12,7 @@ class HumanPlayer {
 
     public int humanMove(char[] state) {
         while (true) {
-            System.out.print("Ingresa el número de casilla (1-25): ");
+        	System.out.print("Ingresa el n�mero de casilla (1-9): ");
             //int square = Integer.parseInt(System.console().readLine());
             int square = Leer.nextInt();
             System.out.println();
